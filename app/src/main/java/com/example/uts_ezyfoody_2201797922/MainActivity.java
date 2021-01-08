@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public CardView drink,food,snack,topUp;
-    public Button myOrder;
+    public Button myOrder,history;
     public int TotalPrice;
     String list_Choice;
     public ArrayList<inputArray> order;
@@ -32,12 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         snack =(CardView) findViewById(R.id.btn_snack);
         topUp =(CardView) findViewById(R.id.btn_topUp);
         myOrder =(Button) findViewById(R.id.btn_MyOrder);
+        history = (Button) findViewById(R.id.btn_history);
 
         drink.setOnClickListener(this);
         food.setOnClickListener(this);
         snack.setOnClickListener(this);
         topUp.setOnClickListener(this);
         myOrder.setOnClickListener(this);
+        history.setOnClickListener(this);
 
         TextView textView = findViewById(R.id.AmountTextView);
 
@@ -119,6 +121,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     Toast.makeText(getBaseContext(),"No Order",Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case R.id.btn_history:
+                intent = new Intent(this,HistoryActivity.class);
+                if(check != null) {
+                    inputArr.putSerializable("myOrder", order);
+
+                    intent.putExtras(inputArr);
+                }
+                startActivity(intent);
                 break;
         }
 

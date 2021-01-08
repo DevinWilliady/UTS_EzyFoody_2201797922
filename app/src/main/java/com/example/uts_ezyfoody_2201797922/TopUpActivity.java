@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class TopUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button addBalance;
+    Button addBalance, home;
     public int TotalPrice;
     String list_Choice;
     public ArrayList<inputArray> order;
@@ -26,6 +26,9 @@ public class TopUpActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
+
+        home = (Button) findViewById(R.id.btn_homee);
+        home.setOnClickListener(this);
 
         addBalance = (Button) findViewById(R.id.btn_addBalance);
         addBalance.setOnClickListener(this);
@@ -96,6 +99,16 @@ public class TopUpActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(intent);
                     }
                 } 
+                break;
+
+            case R.id.btn_homee:
+                intent = new Intent(this, MainActivity.class);
+                if(check != null) {
+                    inputArr.putSerializable("myOrder", order);
+
+                    intent.putExtras(inputArr);
+                }
+                startActivity(intent);
                 break;
         }
     }

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CompleteOrder extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,6 +26,8 @@ public class CompleteOrder extends AppCompatActivity implements View.OnClickList
     LinearLayoutManager llm;
     AdapterComplete ac;
     String address;
+    ArrayList<History> historyList = HistoryHandler.getInstance().history;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,11 @@ public class CompleteOrder extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        Date tempDate = Calendar.getInstance().getTime();
+        String date = tempDate.toString().substring(0,19);
+
+        historyList.add(new History(historyList.size(), address, date));
+
         for(int i=0 ; i<order.size();i++){
             order.remove(i);
         }
